@@ -60,8 +60,19 @@ public class Usuario {
     public List<Coto> getArrenda() {
         return arrenda;
     }
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "nif='" + nif + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", apellido1='" + apellido1 + '\'' +
+                ", apellido2='" + apellido2 + '\'' +
+                ", telefono='" + telefono + '\'' +
+                ", email='" + email + '\'' +
+                ", tipoLicencia='" + tipoLicencia + '\'' +
+                ", licencia='" + licencia + '\'' +
+                ", arrenda=" + arrenda +
+                '}';
+    }
 }

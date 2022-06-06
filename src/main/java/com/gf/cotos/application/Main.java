@@ -1,6 +1,7 @@
 package com.gf.cotos.application;
 
 import com.formdev.flatlaf.FlatLightLaf;
+import com.gf.cotos.controller.Controller;
 import com.gf.cotos.dao.CotoDAO;
 import com.gf.cotos.resources.ConexionBD;
 import java.sql.SQLException;
@@ -33,5 +34,7 @@ public class Main {
         } catch (SQLException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        Controller.start();
     }
 }

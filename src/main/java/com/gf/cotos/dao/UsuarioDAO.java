@@ -17,13 +17,13 @@ public class UsuarioDAO {
 
         String query = "select usuario.*, cazador.TIPO_LICENCIA, cazador.LICENCIA_CAZA "
                 + "from usuario left outer join cazador on cazador.NIF = usuario.NIF "
-                + "and usuario.NIF = ?";
+                + "where usuario.NIF = ?";
         Connection con = ConexionBD.getConnection();
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, nif);
         ResultSet rs = ps.executeQuery();
-        rs.getString(1);
         if (rs.next()) {
+            System.out.println("A");
             String nom = rs.getString(2);
             String ap1 = rs.getString(3);
             String ap2 = rs.getString(4);
