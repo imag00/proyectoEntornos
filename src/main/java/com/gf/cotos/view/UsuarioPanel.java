@@ -31,7 +31,8 @@ public class UsuarioPanel extends JPanel {
         this.usuario = usuario;
         setUsuarioComponents();
         setLabelImg();
-        model.addAll(usuario.getArrenda());
+        for (Coto coto : usuario.getArrenda())
+            model.addElement(coto);
         listArrenda.setModel(model);
     }
 
