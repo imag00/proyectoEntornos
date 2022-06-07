@@ -1,2 +1,2 @@
-# proyectoEntornos
-Proyecto final de Entornos de desarrollo
+# Proyecto CaCoCyL
+Proyecto de cotos de caza para Entornos de Desarrollo.
