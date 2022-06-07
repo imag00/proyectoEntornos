@@ -9,12 +9,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Handles the queries to the database from the application.
+ */
 public class CotoDAO {
 
+    /**
+     * Returns a list of all the cotos that are stored in the database.
+     * @return A list of all the cotos
+     * @throws SQLException Thrown when an error has ocurred with the database
+     */
     public static ArrayList<Coto> getAllCotos() throws SQLException {
         ArrayList<Coto> cotos = new ArrayList<>();
 
-        String query = "select * from coto";
+        String query = "SELECT * FROM COTO";
         Connection con = ConexionBD.getConnection();
         PreparedStatement ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -32,11 +40,18 @@ public class CotoDAO {
         }
         return cotos;
     }
-    
+
+    /**
+     * Gets a particular coto from the specified ID.
+     * @param matricula The ID of the coto to look for
+     * @return The coto that has been recovered from the database. Will return {@code null}
+     *         if no coto has been found
+     * @throws SQLException Thrown when an error has ocurred with the database
+     */
     public static Coto getCoto(String matricula) throws SQLException {
         Coto coto = null;
         
-        String query = "select * from coto where matricula_coto = ?";
+        String query = "SELECT * FROM COTO WHERE MATRICULA_COTO = ?";
         Connection con = ConexionBD.getConnection();
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, matricula);
@@ -54,12 +69,19 @@ public class CotoDAO {
         }
         return coto;
     }
-    
+
+    /**
+     * Gets all the cotos that are arrendados by a user. This is done by searching for the NIF
+     * in ARRENDA.
+     * @param nif The NIF of the user
+     * @return A list of all the cotos that the user arrenda
+     * @throws SQLException Thrown when an error has ocurred with the database
+     */
     public static ArrayList<Coto> getCotosArrenda(String nif) throws SQLException {
         ArrayList<Coto> cotos = new ArrayList<>();
         
-        String query = "select * from arrenda "
-                + "where NIF = ?";
+        String query = "SELECT * FROM ARRENDA "
+                + "WHERE NIF = ?";
         Connection con = ConexionBD.getConnection();
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, nif);
@@ -71,4 +93,5 @@ public class CotoDAO {
         
         return cotos;
     }
+
 }

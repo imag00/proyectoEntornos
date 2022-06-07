@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.gf.cotos.view;
 
 import com.gf.cotos.controller.Controller;
@@ -14,17 +10,16 @@ import java.awt.*;
 import java.net.URL;
 
 /**
- *
- * @author ismael
+ * Main window for the application. Contains both the users tab and the cotos tab.
  */
 public class MainView extends JFrame {
 
     private boolean isCurrentPanelUsuario;
 
     /**
-     * Creates new form Main
+     * Creates the window.
      */
-    public MainView() {
+    protected MainView() {
         initComponents();
         setWindowIcon();
         setName("CaCoCyL");
@@ -33,12 +28,18 @@ public class MainView extends JFrame {
         setBttCotosImg();
     }
 
+    /**
+     * Sets the icon for the window.
+     */
     private void setWindowIcon() {
         URL url = getClass().getResource("/logo.png");
         Image img = new ImageIcon(url).getImage();
         setIconImage(img);
     }
 
+    /**
+     * Sets the icon for the "usuario" button.
+     */
     private void setBttUsuarioImg() {
         URL url = getClass().getResource("/usuarioIcon.png");
         Image img = new ImageIcon(url).getImage()
@@ -47,6 +48,9 @@ public class MainView extends JFrame {
         bttUsuario.setHorizontalAlignment(JButton.CENTER);
     }
 
+    /**
+     * Sets the icon for the "cotos" button.
+     */
     private void setBttCotosImg() {
         URL url = getClass().getResource("/cotoIcon.png");
         Image img = new ImageIcon(url).getImage()
@@ -138,11 +142,19 @@ public class MainView extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Event triggered when the "usuario" button in pressed.
+     * @param evt The event of the action
+     */
     private void bttUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttUsuarioActionPerformed
         if (!isCurrentPanelUsuario)
             Events.pressedUsuarioTab();
     }//GEN-LAST:event_bttUsuarioActionPerformed
 
+    /**
+     * Event triggered when the "cotos" button in pressed.
+     * @param evt The event of the action
+     */
     private void bttCotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttCotosActionPerformed
         if (isCurrentPanelUsuario)
             Events.pressedCotosTab();
@@ -158,7 +170,7 @@ public class MainView extends JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-    public void showUsuarioPanel() {
+    protected void showUsuarioPanel() {
         UsuarioPanel usuarioPanel = new UsuarioPanel(Controller.getInstance().getUsuario());
         usuarioPanel.setSize(jpMain.getSize());
         jpMain.removeAll();
@@ -168,7 +180,7 @@ public class MainView extends JFrame {
         isCurrentPanelUsuario = true;
     }
 
-    public void showCotosPanel(String matricula) {
+    protected void showCotosPanel(String matricula) {
         CotosPanel cotosPanel = new CotosPanel(Controller.getInstance().getCotos(), matricula);
         cotosPanel.setSize(jpMain.getSize());
         jpMain.removeAll();
@@ -178,7 +190,7 @@ public class MainView extends JFrame {
         isCurrentPanelUsuario = false;
     }
 
-    public void setCotosBttSelected() {
+    protected void setCotosBttSelected() {
         bttCotos.setSelected(true);
     }
 }

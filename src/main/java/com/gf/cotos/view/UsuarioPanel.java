@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.gf.cotos.view;
 
 import com.gf.cotos.controller.Events;
@@ -13,8 +9,7 @@ import java.awt.*;
 import java.net.URL;
 
 /**
- *
- * @author ismael
+ * Panel for showing the information of all the {@link Usuario} as a table.
  */
 public class UsuarioPanel extends JPanel {
 
@@ -23,9 +18,10 @@ public class UsuarioPanel extends JPanel {
     private final DefaultListModel<Coto> model = new DefaultListModel<>();
 
     /**
-     * Creates new form UsuarioPanel
+     * Creates a panel that displays all the information from the current user.
+     * @param usuario The current user of the application
      */
-    public UsuarioPanel(Usuario usuario) {
+    protected UsuarioPanel(Usuario usuario) {
         initComponents();
         setVisible(true);
         this.usuario = usuario;
@@ -36,6 +32,9 @@ public class UsuarioPanel extends JPanel {
         listArrenda.setModel(model);
     }
 
+    /**
+     * Sets the image for the banner of the panel.
+     */
     private void setLabelImg() {
         URL url = getClass().getResource("/bannerUsuario.png");
         Image img = new ImageIcon(url).getImage()
@@ -44,6 +43,9 @@ public class UsuarioPanel extends JPanel {
         jlImg.setHorizontalAlignment(JLabel.CENTER);
     }
 
+    /**
+     * Fills the text fields in the panel with the corresponding information from the user.
+     */
     private void setUsuarioComponents() {
         jtNIF.setText(usuario.getNif());
         jtNombre.setText(usuario.getNombre());
@@ -236,7 +238,7 @@ public class UsuarioPanel extends JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void listArrendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listArrendaMouseClicked
-        if (evt.getClickCount() != 2) return;
+        if (evt.getClickCount() != 2 || listArrenda.isSelectionEmpty()) return;
         String matricula = model.get(listArrenda.getSelectedIndex()).getMatricula();
         Events.doubleClickedArrenda(matricula);
     }//GEN-LAST:event_listArrendaMouseClicked

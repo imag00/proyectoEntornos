@@ -9,17 +9,27 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
 public class Main {
-    public static void main(String[] args) {        
+
+    private static final String URL = "jdbc:mysql://localhost:3306/cacocyl";
+    private static final String USER = "root";
+    private static final String PASSWORD = "";
+
+    /**
+     * Main method for the application.
+     * Sets the look and feel, creates the connection singleton and starts the controller.
+     * @param args Arguments
+     */
+    public static void main(String[] args) {
+        //
         try {
             FlatLightLaf.setup();
             UIManager.setLookAndFeel(new FlatLightLaf());
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
         }
-        
-        
+
         try {
-            ConexionBD.createConnection("jdbc:mysql://localhost:3306/prueba_bases", "root", "");
+            ConexionBD.createConnection(URL, USER, PASSWORD);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Ha habido un error de conexión",
                     "Error", JOptionPane.ERROR_MESSAGE);

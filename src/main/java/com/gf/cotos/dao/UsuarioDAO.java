@@ -8,16 +8,22 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class UsuarioDAO {
 
+    /**
+     * Returns a particular user from the database by NIF.
+     * @param nif The NIF of the user to find
+     * @return The user corresponding to that NIF. Will return {@code null}
+     *         if no coto has been found
+     * @throws SQLException Thrown when an error has ocurred with the database
+     */
     public static Usuario getUsuario(String nif) throws SQLException {
         Usuario usuario = null;
 
-        String query = "select usuario.*, cazador.TIPO_LICENCIA, cazador.LICENCIA_CAZA "
-                + "from usuario left outer join cazador on cazador.NIF = usuario.NIF "
-                + "where usuario.NIF = ?";
+        String query = "SELECT USUARIO.*, CAZADOR.TIPO_LICENCIA, CAZADOR.LICENCIA_CAZA "
+                + "FROM USUARIO LEFT OUTER JOIN CAZADOR ON CAZADOR.NIF = USUARIO.NIF "
+                + "WHERE USUARIO.NIF = ?";
         Connection con = ConexionBD.getConnection();
         PreparedStatement ps = con.prepareStatement(query);
         ps.setString(1, nif);
@@ -37,22 +43,4 @@ public class UsuarioDAO {
 
         return usuario;
     }
-
-    public static boolean addUsuario(String nif, String nombre, String apellido1, String apellido2, String telefono, String email, String tipoLicencia, String licencia, List<Coto> arrenda) throws SQLException {
-        String insert = "insert into usuario values(?,?,?,?,?,?,?,?,?)";
-        Connection con = ConexionBD.getConnection();
-        PreparedStatement ps = con.prepareStatement(insert);
-        ps.setString(1, nif);
-        ps.setString(2, nombre);
-        ps.setString(3, apellido1);
-        ps.setString(4, apellido2);
-        ps.setString(5, telefono);
-        ps.setString(6, email);
-        ps.setString(7, email);
-        ps.setString(8, tipoLicencia);
-        ps.setString(9, licencia);
-
-        return ps.executeUpdate() > 0;
-    }
-
 }

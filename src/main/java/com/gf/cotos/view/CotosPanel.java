@@ -1,49 +1,54 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package com.gf.cotos.view;
 
 import com.gf.cotos.entities.Coto;
-import com.gf.cotos.entities.Usuario;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.net.URL;
 
 /**
- *
- * @author ismael
+ * Panel for showing the information of all the {@link Coto} as a table.
  */
 public class CotosPanel extends JPanel {
 
+    /**
+     * An array of all the column names for the {@code DefaultTableModel}.
+     */
     private final String[] cols = new String [] {
             "Matricula", "Propietario", "Provincia", "Privado", "Municipio",
             "Constitución", "Anulado", "Anulación", "Cambio de titular"
     };
     private final Coto[] cotos;
 
+    /**
+     * The default table model used to add cotos to the table. Overrides the {@code isCellEditable}
+     * method to make all cells uneditable and {@code getColumnClass} to assign custom classes to every
+     * column
+     */
     DefaultTableModel model = new DefaultTableModel(null, cols) {
         @Override
         public boolean isCellEditable(int row, int column) {
             return false;
         }
 
+        // These are the object classes that the model will use for the columns
         Class[] types = new Class [] {
                 String.class, String.class, String.class, Boolean.class, String.class, Object.class, Boolean.class, Object.class, Object.class
         };
 
+        @Override
         public Class getColumnClass(int columnIndex) {
             return types [columnIndex];
         }
-
     };
 
     /**
-     * Creates new form UsuarioPanel
+     * Creates a panel that displays all the information from the list of all the cotos.
+     * @param cotos The list of all the cotos
+     * @param matricula The ID of the coto that should be selected by default. Can be {@code null} in case
+     *                  no specific coto should be selected by default
      */
-    public CotosPanel(Coto[] cotos, String matricula) {
+    protected CotosPanel(Coto[] cotos, String matricula) {
         initComponents();
         this.cotos = cotos;
         setVisible(true);
@@ -54,16 +59,27 @@ public class CotosPanel extends JPanel {
         goToMatricula(matricula);
     }
 
+    /**
+     * Selects a specific row in which the coto that corresponds the parameter is.
+     * @param matricula The ID of the coto to select
+     */
     private void goToMatricula(String matricula) {
         for (int i = 0; i < model.getRowCount(); i++) {
             String matriculaCol = model.getValueAt(i, 0).toString();
             if (matricula.equals(matriculaCol)) {
                 jTable1.setRowSelectionInterval(i, i);
+                // This line moves the scroll to the correct position in case the selected
+                // coto is outside of the current viewing range.
+                jTable1.scrollRectToVisible(
+                        new Rectangle(jTable1.getCellRect(i, 0, true)));
                 break;
             }
         }
     }
 
+    /**
+     * Adds all the cotos to the table.
+     */
     private void setupTable() {
         for (Coto coto : cotos) {
             Object[] data = new Object[] {
@@ -82,6 +98,9 @@ public class CotosPanel extends JPanel {
         jTable1.setModel(model);
     }
 
+    /**
+     * Sets the header image for the panel.
+     */
     private void setLabelImg() {
         URL url = getClass().getResource("/bannerCoto.png");
         Image img = new ImageIcon(url).getImage()

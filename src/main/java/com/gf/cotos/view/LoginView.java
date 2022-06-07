@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package com.gf.cotos.view;
 
 import com.gf.cotos.controller.Events;
@@ -12,15 +8,14 @@ import java.awt.event.KeyEvent;
 import java.net.URL;
 
 /**
- *
- * @author ismael
+ * View that prompts the user to log in.
  */
 public class LoginView extends JFrame {
 
     /**
-     * Creates new form Login
+     * Creates the view that prompts the user to log in.
      */
-    public LoginView() {
+    protected LoginView() {
         initComponents();
         setResizable(false);
         setWindowIcon();
@@ -28,12 +23,18 @@ public class LoginView extends JFrame {
         setLabelImg();
     }
 
+    /**
+     * Sets the icon for the window.
+     */
     private void setWindowIcon() {
         URL url = getClass().getResource("/logo.png");
         Image img = new ImageIcon(url).getImage();
         setIconImage(img);
     }
 
+    /**
+     * Sets the logo image in the window.
+     */
     private void setLabelImg() {
         URL url = getClass().getResource("/logo.png");
         Image img = new ImageIcon(url).getImage()
@@ -109,10 +110,18 @@ public class LoginView extends JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Action triggered when the log in button is pressed.
+     * @param evt The event of the action
+     */
     private void bttIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttIniciarSesionActionPerformed
         Events.loginAccepted(jtDNI.getText());
     }//GEN-LAST:event_bttIniciarSesionActionPerformed
 
+    /**
+     * Action trigger when the ENTER key is pressed in the NIF field.
+     * @param evt The event of the action
+     */
     private void jtDNIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDNIKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER)
             bttIniciarSesion.doClick();

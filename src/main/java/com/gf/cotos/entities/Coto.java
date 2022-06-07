@@ -2,6 +2,9 @@ package com.gf.cotos.entities;
 
 import java.util.Date;
 
+/**
+ * Entity coto.
+ */
 public class Coto {
     private final String matricula;
     private final String nif;
