@@ -10,6 +10,28 @@ import java.util.ArrayList;
 import java.util.Date;
 
 public class CotoDAO {
+
+    public static ArrayList<Coto> getAllCotos() throws SQLException {
+        ArrayList<Coto> cotos = new ArrayList<>();
+
+        String query = "select * from coto";
+        Connection con = ConexionBD.getConnection();
+        PreparedStatement ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            String matricula = rs.getString(1);
+            String nif = rs.getString(2);
+            String provincia = rs.getString(3);
+            boolean privado = rs.getBoolean(4);
+            String munic = rs.getString(5);
+            Date constitucion = rs.getDate(6);
+            boolean anulado = rs.getBoolean(7);
+            Date anulacion = rs.getDate(8);
+            Date cambioTitular = rs.getDate(9);
+            cotos.add(new Coto(matricula, nif, provincia, privado, munic, constitucion, anulado, anulacion, cambioTitular));
+        }
+        return cotos;
+    }
     
     public static Coto getCoto(String matricula) throws SQLException {
         Coto coto = null;
@@ -30,7 +52,6 @@ public class CotoDAO {
             Date cambioTitular = rs.getDate(9);
             coto = new Coto(matricula, nif, provincia, privado, munic, constitucion, anulado, anulacion, cambioTitular);
         }
-        
         return coto;
     }
     
@@ -45,7 +66,6 @@ public class CotoDAO {
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             String matricula = rs.getString(2);
-            System.out.println(matricula);
             cotos.add(getCoto(matricula));
         }
         

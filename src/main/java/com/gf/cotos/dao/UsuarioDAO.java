@@ -23,7 +23,6 @@ public class UsuarioDAO {
         ps.setString(1, nif);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            System.out.println("A");
             String nom = rs.getString(2);
             String ap1 = rs.getString(3);
             String ap2 = rs.getString(4);

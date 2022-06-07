@@ -4,6 +4,8 @@
  */
 package com.gf.cotos.view;
 
+import com.gf.cotos.controller.Events;
+import com.gf.cotos.entities.Coto;
 import com.gf.cotos.entities.Usuario;
 
 import javax.swing.*;
@@ -14,9 +16,11 @@ import java.net.URL;
  *
  * @author ismael
  */
-public class UsuarioPanel extends javax.swing.JPanel {
+public class UsuarioPanel extends JPanel {
 
     private final Usuario usuario;
+
+    private final DefaultListModel<Coto> model = new DefaultListModel<>();
 
     /**
      * Creates new form UsuarioPanel
@@ -27,11 +31,12 @@ public class UsuarioPanel extends javax.swing.JPanel {
         this.usuario = usuario;
         setUsuarioComponents();
         setLabelImg();
+        model.addAll(usuario.getArrenda());
+        listArrenda.setModel(model);
     }
 
     private void setLabelImg() {
         URL url = getClass().getResource("/bannerUsuario.png");
-        System.out.println(jlImg.getWidth());
         Image img = new ImageIcon(url).getImage()
                 .getScaledInstance(600, 103, Image.SCALE_SMOOTH);
         jlImg.setIcon(new ImageIcon(img));
@@ -58,27 +63,27 @@ public class UsuarioPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtNIF = new javax.swing.JTextField();
-        jtNombre = new javax.swing.JTextField();
-        jtApe1 = new javax.swing.JTextField();
-        jtApe2 = new javax.swing.JTextField();
-        jtTlf = new javax.swing.JTextField();
-        jtEmail = new javax.swing.JTextField();
-        jtLic = new javax.swing.JTextField();
-        jtTipo = new javax.swing.JTextField();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listArrenda = new javax.swing.JList<>();
-        jlNIF = new javax.swing.JLabel();
-        jlNombre = new javax.swing.JLabel();
-        jlAp1 = new javax.swing.JLabel();
-        jlAp2 = new javax.swing.JLabel();
-        jlTlf = new javax.swing.JLabel();
-        jlEmail = new javax.swing.JLabel();
-        jlLicencia = new javax.swing.JLabel();
-        jlTipo = new javax.swing.JLabel();
-        jlArrenda = new javax.swing.JLabel();
-        jpImg = new javax.swing.JPanel();
-        jlImg = new javax.swing.JLabel();
+        jtNIF = new JTextField();
+        jtNombre = new JTextField();
+        jtApe1 = new JTextField();
+        jtApe2 = new JTextField();
+        jtTlf = new JTextField();
+        jtEmail = new JTextField();
+        jtLic = new JTextField();
+        jtTipo = new JTextField();
+        jScrollPane1 = new JScrollPane();
+        listArrenda = new JList<>();
+        jlNIF = new JLabel();
+        jlNombre = new JLabel();
+        jlAp1 = new JLabel();
+        jlAp2 = new JLabel();
+        jlTlf = new JLabel();
+        jlEmail = new JLabel();
+        jlLicencia = new JLabel();
+        jlTipo = new JLabel();
+        jlArrenda = new JLabel();
+        jpImg = new JPanel();
+        jlImg = new JLabel();
 
         jtNIF.setEditable(false);
 
@@ -96,6 +101,11 @@ public class UsuarioPanel extends javax.swing.JPanel {
 
         jtTipo.setEditable(false);
 
+        listArrenda.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listArrendaMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(listArrenda);
 
         jlNIF.setText("NIF");
@@ -116,137 +126,142 @@ public class UsuarioPanel extends javax.swing.JPanel {
 
         jlArrenda.setText("Arrenda");
 
-        jpImg.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jpImg.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
 
-        javax.swing.GroupLayout jpImgLayout = new javax.swing.GroupLayout(jpImg);
+        GroupLayout jpImgLayout = new GroupLayout(jpImg);
         jpImg.setLayout(jpImgLayout);
         jpImgLayout.setHorizontalGroup(
-            jpImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            jpImgLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(jpImgLayout.createSequentialGroup()
-                .addComponent(jlImg, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlImg, GroupLayout.PREFERRED_SIZE, 600, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jpImgLayout.setVerticalGroup(
-            jpImgLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jlImg, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
+            jpImgLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            .addComponent(jlImg, GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        GroupLayout layout = new GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addComponent(jlNombre))
-                            .addComponent(jlNIF, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlNIF, GroupLayout.Alignment.TRAILING))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                             .addComponent(jtNIF)
                             .addComponent(jtNombre)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlAp1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtApe1, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtApe1, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jlAp2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jtApe2, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jtApe2, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jlArrenda)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jlTlf)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jtTlf, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtTlf, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                             .addComponent(jlLicencia)
                             .addComponent(jlTipo)
                             .addComponent(jlEmail))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtTipo, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addComponent(jtTipo, GroupLayout.Alignment.TRAILING)
                             .addComponent(jtLic)))
-                    .addComponent(jtEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtEmail, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 136, GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpImg, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jpImg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpImg, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtNIF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtTlf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtNIF, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtTlf, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNIF)
                     .addComponent(jlTlf))
                 .addGap(70, 70, 70)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtNombre, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlNombre)
                     .addComponent(jlEmail))
                 .addGap(71, 71, 71)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtApe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtLic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtApe1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtLic, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAp1)
                     .addComponent(jlLicencia))
                 .addGap(69, 69, 69)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtApe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtApe2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlAp2)
-                    .addComponent(jtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtTipo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                     .addComponent(jlTipo))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(24, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jlArrenda)
                         .addGap(38, 38, 38))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void listArrendaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listArrendaMouseClicked
+        if (evt.getClickCount() != 2) return;
+        String matricula = model.get(listArrenda.getSelectedIndex()).getMatricula();
+        Events.doubleClickedArrenda(matricula);
+    }//GEN-LAST:event_listArrendaMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel jlAp1;
-    private javax.swing.JLabel jlAp2;
-    private javax.swing.JLabel jlArrenda;
-    private javax.swing.JLabel jlEmail;
-    private javax.swing.JLabel jlImg;
-    private javax.swing.JLabel jlLicencia;
-    private javax.swing.JLabel jlNIF;
-    private javax.swing.JLabel jlNombre;
-    private javax.swing.JLabel jlTipo;
-    private javax.swing.JLabel jlTlf;
-    private javax.swing.JPanel jpImg;
-    private javax.swing.JTextField jtApe1;
-    private javax.swing.JTextField jtApe2;
-    private javax.swing.JTextField jtEmail;
-    private javax.swing.JTextField jtLic;
-    private javax.swing.JTextField jtNIF;
-    private javax.swing.JTextField jtNombre;
-    private javax.swing.JTextField jtTipo;
-    private javax.swing.JTextField jtTlf;
-    private javax.swing.JList<String> listArrenda;
+    private JScrollPane jScrollPane1;
+    private JLabel jlAp1;
+    private JLabel jlAp2;
+    private JLabel jlArrenda;
+    private JLabel jlEmail;
+    private JLabel jlImg;
+    private JLabel jlLicencia;
+    private JLabel jlNIF;
+    private JLabel jlNombre;
+    private JLabel jlTipo;
+    private JLabel jlTlf;
+    private JPanel jpImg;
+    private JTextField jtApe1;
+    private JTextField jtApe2;
+    private JTextField jtEmail;
+    private JTextField jtLic;
+    private JTextField jtNIF;
+    private JTextField jtNombre;
+    private JTextField jtTipo;
+    private JTextField jtTlf;
+    private JList<Coto> listArrenda;
     // End of variables declaration//GEN-END:variables
 }

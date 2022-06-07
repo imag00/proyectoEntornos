@@ -63,7 +63,7 @@ public class Coto {
 
     @Override
     public String toString() {
-        return "Coto{" + "matricula=" + matricula + ", nif=" + nif + ", codigoProvincia=" + codigoProvincia + ", privado=" + privado + ", municipio=" + municipio + ", constitucion=" + constitucion + ", anulado=" + anulado + ", anulacion=" + anulacion + ", cambioTitular=" + cambioTitular + '}';
+        return "Matrícula: " + matricula + ", provincia: " + codigoProvincia;
     }
     
     

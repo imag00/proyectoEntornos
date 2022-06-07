@@ -1,7 +1,5 @@
 package com.gf.cotos.view;
 
-import com.gf.cotos.entities.Usuario;
-
 public class ViewWrapper {
 
     private static final LoginView loginView = new LoginView();
@@ -13,9 +11,16 @@ public class ViewWrapper {
     public static void disposeLoginView() {
         loginView.dispose();
     }
-    public static void showMainView(Usuario usuario) {
-        mainView.setUsuario(usuario);
+    public static void showMainView() {
+        showUsuarioPanel();
         mainView.setVisible(true);
     }
+    public static void showUsuarioPanel() {
+        mainView.showUsuarioPanel();
+    }
 
+    public static void showCotosPanel(String matricula) {
+        mainView.setCotosBttSelected();
+        mainView.showCotosPanel(matricula);
+    }
 }

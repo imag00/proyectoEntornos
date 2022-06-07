@@ -4,6 +4,9 @@
  */
 package com.gf.cotos.view;
 
+import com.gf.cotos.controller.Controller;
+import com.gf.cotos.controller.Events;
+import com.gf.cotos.entities.Coto;
 import com.gf.cotos.entities.Usuario;
 
 import javax.swing.*;
@@ -16,7 +19,7 @@ import java.net.URL;
  */
 public class MainView extends JFrame {
 
-    private Usuario usuario;
+    private boolean isCurrentPanelUsuario;
 
     /**
      * Creates new form Main
@@ -61,70 +64,89 @@ public class MainView extends JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bttGroup = new ButtonGroup();
-        jCheckBox1 = new JCheckBox();
-        jpBtts = new JPanel();
-        bttCotos = new JToggleButton();
-        bttUsuario = new JToggleButton();
-        jpMain = new JPanel();
+        bttGroup = new javax.swing.ButtonGroup();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jpBtts = new javax.swing.JPanel();
+        bttCotos = new javax.swing.JToggleButton();
+        bttUsuario = new javax.swing.JToggleButton();
+        jpMain = new javax.swing.JPanel();
 
         jCheckBox1.setText("jCheckBox1");
 
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(600, 600));
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
-        jpBtts.setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
+        jpBtts.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         bttGroup.add(bttCotos);
+        bttCotos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttCotosActionPerformed(evt);
+            }
+        });
 
         bttGroup.add(bttUsuario);
         bttUsuario.setSelected(true);
+        bttUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bttUsuarioActionPerformed(evt);
+            }
+        });
 
-        GroupLayout jpBttsLayout = new GroupLayout(jpBtts);
+        javax.swing.GroupLayout jpBttsLayout = new javax.swing.GroupLayout(jpBtts);
         jpBtts.setLayout(jpBttsLayout);
         jpBttsLayout.setHorizontalGroup(
-            jpBttsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, jpBttsLayout.createSequentialGroup()
+            jpBttsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpBttsLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(bttUsuario, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE)
+                .addComponent(bttUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(bttCotos, GroupLayout.PREFERRED_SIZE, 300, GroupLayout.PREFERRED_SIZE))
+                .addComponent(bttCotos, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpBttsLayout.setVerticalGroup(
-            jpBttsLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(bttCotos, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(bttUsuario, GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
+            jpBttsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(bttCotos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bttUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 82, Short.MAX_VALUE)
         );
 
-        GroupLayout jpMainLayout = new GroupLayout(jpMain);
+        javax.swing.GroupLayout jpMainLayout = new javax.swing.GroupLayout(jpMain);
         jpMain.setLayout(jpMainLayout);
         jpMainLayout.setHorizontalGroup(
-            jpMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
         jpMainLayout.setVerticalGroup(
-            jpMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+            jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 521, Short.MAX_VALUE)
         );
 
-        GroupLayout layout = new GroupLayout(getContentPane());
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addComponent(jpBtts, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpMain, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpBtts, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-            .addGroup(GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jpMain, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jpMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jpBtts, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                .addComponent(jpBtts, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bttUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttUsuarioActionPerformed
+        if (!isCurrentPanelUsuario)
+            Events.pressedUsuarioTab();
+    }//GEN-LAST:event_bttUsuarioActionPerformed
+
+    private void bttCotosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bttCotosActionPerformed
+        if (isCurrentPanelUsuario)
+            Events.pressedCotosTab();
+    }//GEN-LAST:event_bttCotosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -162,19 +184,36 @@ public class MainView extends JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private JToggleButton bttCotos;
-    private ButtonGroup bttGroup;
-    private JToggleButton bttUsuario;
-    private JCheckBox jCheckBox1;
-    private JPanel jpBtts;
-    private JPanel jpMain;
+    private javax.swing.JToggleButton bttCotos;
+    private javax.swing.ButtonGroup bttGroup;
+    private javax.swing.JToggleButton bttUsuario;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JPanel jpBtts;
+    private javax.swing.JPanel jpMain;
     // End of variables declaration//GEN-END:variables
 
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-        UsuarioPanel usuarioPanel = new UsuarioPanel(usuario);
+    public void showUsuarioPanel() {
+        UsuarioPanel usuarioPanel = new UsuarioPanel(Controller.getInstance().getUsuario());
         usuarioPanel.setSize(jpMain.getSize());
+        jpMain.removeAll();
+        jpMain.repaint();
         jpMain.add(usuarioPanel);
+        jpMain.revalidate();
+        isCurrentPanelUsuario = true;
+    }
+
+    public void showCotosPanel(String matricula) {
+        CotosPanel cotosPanel = new CotosPanel(Controller.getInstance().getCotos(), matricula);
+        cotosPanel.setSize(jpMain.getSize());
+        jpMain.removeAll();
+        jpMain.repaint();
+        jpMain.add(cotosPanel);
+        jpMain.revalidate();
+        isCurrentPanelUsuario = false;
+    }
+
+    public void setCotosBttSelected() {
+        bttCotos.setSelected(true);
     }
 }
